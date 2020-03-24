@@ -1,0 +1,19 @@
+/*
+ * About : math algorithm
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-03-22
+ * URL   : https://www.acmicpc.net/problem/1002
+/
+
+a,b = list(map(int, input().split()))
+num1,num2 = a,b
+while b>0:
+    a,b= max(a,b), min(a,b)
+    r = a%b
+    a,b = b,r    # (a와 b의 최대공약수가 b와 r의 최대공약수와 같음)
+    
+result_max = a
+result_min = num1*(num2//a)
+
+print(result_max)
+print(result_min)
