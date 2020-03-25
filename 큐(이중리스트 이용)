@@ -1,0 +1,70 @@
+/*
+ * About : math algorithm
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-03-25
+ * URL   : https://www.acmicpc.net/problem/18258
+/
+
+import sys
+class Queue(object):
+    def __init__(self):
+        self.in_items=[]
+        self.out_items=[]
+        
+    def push(self, item):
+        self.in_items.append(item)
+    
+    def _trans(self):
+        while self.in_items:
+            self.out_items.append(self.in_items.pop())
+            
+    def pop(self):
+        if not self.out_items:
+            self._trans()
+        if self.out_items:
+            return(self.out_items.pop())
+        else:
+            return(-1)
+        
+    def size(self):
+        return(len(self.in_items)+len(self.out_items))
+    
+    def empty(self):
+        if not (bool(self.in_items) or bool(self.out_items)):
+            return(1)
+        else:
+            return(0)
+    
+    def front(self):
+        if self.out_items:
+            return(self.out_items[-1])
+        elif self.in_items:
+            return(self.in_items[0])
+        else:
+            return(-1)
+    
+    def back(self):
+        if self.in_items:
+            return(self.in_items[-1])
+        elif self.out_items:
+            return(self.out_items[0])
+        else:
+            return(-1)
+
+num=int(sys.stdin.readline())
+queue=Queue()
+for i in range(num):
+    commend = sys.stdin.readline().strip()
+    if commend[0:4]=="push":
+        a, n = commend.split()
+        queue.push(int(n))
+    elif commend == "front":
+        print(queue.front())
+    elif commend == "pop":
+        print(queue.pop())
+    elif commend =="size":
+        print(queue.size())
+    elif commend == "empty":
+        print(queue.empty())
+    elif commend == "back":
+        print(queue.back())
