@@ -1,0 +1,75 @@
+/*
+ * About : math algorithm
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-03-26
+ * URL   : https://www.acmicpc.net/problem/10866
+/
+
+class Deque(object):
+    def __init__(self):
+        self.front=[] # 덱의 앞에 넣을 떄
+        self.back=[]  # 덱의 뒤에 넣을 떄
+    def push_front(self,item):
+        self.front.append(item)
+    def push_back(self,item):
+        self.back.append(item)
+    def pop_front(self):
+        if (not self.front) and self.back:
+            print(self.back.pop(0))
+        elif self.front:
+            print(self.front.pop())
+        elif not(len(self.front)+len(self.back)):
+            print(-1)
+    def pop_back(self):
+        if (not self.back) and self.front:
+            print(self.front.pop(0))
+        elif self.back:
+            print(self.back.pop())
+        elif not(len(self.front)+len(self.back)):
+            print(-1)
+    def size(self):
+        print(len(self.front)+len(self.back))
+    def empty(self):
+        if not (bool(self.front) or bool(self.back)):
+            print(1)
+        else:
+            print(0)
+    def fronted(self):
+        if (not self.front) and self.back:
+            print(self.back[0])
+        elif self.front:
+            print(self.front[-1])
+        elif not(len(self.front)+len(self.back)):
+            print(-1)
+    def backed(self):
+        if (not self.back) and self.front:
+            print(self.front[0])
+        elif self.back:
+            print(self.back[-1])
+        elif not(len(self.front)+len(self.back)):
+            print(-1)
+import sys
+num=int(sys.stdin.readline())
+queue = Deque()
+for i in range(num):
+    commend = sys.stdin.readline().strip()
+    if commend[0:4]=="push":
+        c, n = commend.split()
+        n=int(n)
+        if c=="push_front":
+            queue.push_front(n)
+        if c=="push_back":
+            queue.push_back(n)
+    #commend = sys.stdin.readline().strip()
+    elif commend == "front":
+        queue.fronted()
+    elif commend == "pop_front":
+        queue.pop_front()
+    elif commend == "pop_back":
+        queue.pop_back()
+    elif commend =="size":
+        queue.size()
+    elif commend == "empty":
+        queue.empty()
+    elif commend == "back":
+        queue.backed()
