@@ -1,0 +1,36 @@
+/*
+ * About : math algorithm
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-03-28
+ * URL   : https://www.acmicpc.net/problem/10866
+/
+
+def sosu_finder(x):
+    hubo = {i:True for i in range(2,x+1)}
+    end1 = int(pow(x,1/2))+1
+    for i in range(2,end1):
+        if not hubo[i]:
+            continue
+        end2=x//i+1
+        new_hubo={i*j:False for j in range(2,end2)}
+        hubo.update(new_hubo)     
+    result={i:1 for i in hubo.keys() if hubo[i]}
+    return result
+
+hubo=sosu_finder(1000000) # 최대 input 값으로 미리 소수 형성 
+while True:
+    n = int(input())
+    if not n:
+        break
+    end=0
+    for i in hubo.keys():
+        if end>len(hubo)//2+1: # 앞에서 찾았을 때 없으면 반 이상 지난 후의 수에도 없을 것. 소수찾을 때 sqrt(X) 와 동일
+            break
+        end+=1
+        finded = n-i
+        value = hubo.get(finded,0)
+        if value:
+            print(f"{n} = {i} + {finded}")
+            break
+    if not value:
+        print("Goldbach's conjecture is wrong")
