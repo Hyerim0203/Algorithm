@@ -1,0 +1,64 @@
+  
+/*
+ * About : 브루트 포스 algorithm
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-04-02
+ * URL   : https://www.acmicpc.net/problem/14500
+/
+
+def one(x,n,m):
+    count=0
+    for i in range(n):
+        for j in range(m):
+            #가로
+            if count==0 and j+3<=m-1 and i<=n-1:
+                count+=1
+                value1_1 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i][j+3]
+                result=value1_1
+            if j+3<=m-1 and i<=n-1:
+                value1_1 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i][j+3] #도형1
+                result=max(result,value1_1)
+            if j+1<=m-1 and i+1<=n-1:
+                value4 = x[i][j]+x[i+1][j]+x[i+1][j+1]+x[i][j+1] # 도형4 끝
+                result=max(result,value4)
+                if j+2<=m-1:
+                    value2_1 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i+1][j] # 도형2
+                    value2_2 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i+1][j+2] #도형2
+                    value5_1 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i+1][j+1] #도형5
+                    value3_1 = x[i][j]+x[i][j+1]+x[i+1][j+1]+x[i+1][j+2] #도형3
+                    result=max(result,value2_1,value2_2,value5_1,value3_1)
+                if j-1>=0:
+                    value3_2 = x[i][j]+x[i+1][j-1]+x[i][j+1]+x[i+1][j] #도형3
+                    result=max(result,value3_2)
+            if j+2<=m-1 and i-1>=0:
+                value2_3 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i-1][j] #도형2
+                value2_4 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i-1][j+2] # 도형2
+                value5_2 = x[i][j]+x[i][j+1]+x[i][j+2]+x[i-1][j+1] #도형5
+                result=max(result,value2_3,value2_4,value5_2)
+            #세로
+            if i+3<=n-1 and j<=m-1:
+                value1_1 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i+3][j] #도형1
+                result=max(result,value1_1)
+            if i+2<=n-1 and j+1<=m-1:
+                value2_1 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i][j+1] # 도형2
+                value2_2 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i+2][j+1] #도형2
+                value5_1 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i+1][j+1] #도형5
+                value3_1 = x[i][j]+x[i+1][j]+x[i+1][j+1]+x[i+2][j+1] #도형3
+                result=max(result,value2_1,value2_2,value5_1,value3_1)
+            if i-1>=0 and i+1<=n-1 and j+1<=m-1:
+                value3_2 = x[i][j]+x[i-1][j+1]+x[i+1][j]+x[i][j+1] #도형3
+                result=max(result,value3_2)
+            if i+2<=n-1 and j-1>=0:
+                value2_3 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i][j-1] #도형2
+                value2_4 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i+2][j-1] # 도형2
+                value5_2 = x[i][j]+x[i+1][j]+x[i+2][j]+x[i+1][j-1] #도형5
+                result=max(result,value2_3,value2_4,value5_2)
+ 
+    return result
+
+n,m = map(int,input().split())
+x=[]
+for i in range(n):
+    x.append(list(map(int,input().split())))
+    
+print(one(x,n,m))
