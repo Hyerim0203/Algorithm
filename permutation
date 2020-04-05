@@ -1,0 +1,21 @@
+class permutation(object):
+    def __init__(self,x):
+        self.x=x
+        self.visited=[False]*len(x)
+        self.result=[]
+    def _do(self):
+        for idx, visited in enumerate(self.visited):
+            if not visited:
+                self.result.append(self.x[idx])
+                self.visited[idx]=True
+                if sum(self.visited)!=len(self.x):
+                    self._do()
+                else:
+                    self.visited[idx]=False
+                    print(self.result)
+                self.visited[idx]=False
+                self.result=self.result[:sum(self.visited)]
+                
+data=["r","e","o"]
+a=permutation(data)
+a._do()
