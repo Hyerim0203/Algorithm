@@ -1,0 +1,48 @@
+/*
+ * About : 브루트 포스
+ * Author: hyerim0203@GitHub (tky9873@gmail.com)
+ * Date  : 2020-04-06
+ * URL   : https://www.acmicpc.net/problem/6603
+/
+
+class pick(object):
+    def __init__(self,case,k):
+        self.case=case
+        self.k=k
+        self.picked=[False]*k
+        self.result=[]
+        self.start_idx=0
+        self._dopick(-1)
+
+    def _dopick(self,place):
+        for idx, picked in enumerate(self.picked):
+            if not picked and idx>place:
+                self.result.append(self.case[idx])
+                self.picked[idx]=True
+                if len(self.result)==6:
+                    self._print(self.result)
+                    self.picked[idx]=False
+                    self.result=self.result[:len(self.result)-1]
+                else:
+                    self._dopick(idx)
+                    self.picked[idx]=False
+                    self.result=self.result[:len(self.result)-1]
+                
+    def _print(self,x):
+        for i in x:
+            print(i,end=" ")
+        print("")
+        
+    #%classmethod
+    def _repeat(self,case,k):
+        self.pick(case,k)
+        print("")
+
+while True:
+    case = list(map(int,input().split()))
+    k,case=case[0],case[1:]
+    if not k:
+        break
+    else:
+        pick(case,k)
+        print("")
