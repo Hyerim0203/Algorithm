@@ -1,0 +1,30 @@
+
+class Password(object):
+    def __init__(self,l,c,data):
+        self.l=l
+        self.c=c
+        self.data=data
+        self.selected=[False]*c
+        self.result=""
+        self._do(-1)
+        
+    def _do(self,place):
+        for idx, selected in enumerate(self.selected[place+1:]):
+            if not selected:
+                self.result+=self.data[place+1+idx]
+                self.selected[idx+place+1]=True
+                if len(self.result)==l:
+                    self._correct()
+                    self.selected[idx+place+1]=False
+                    self.result=self.result[:l-1]
+                else:
+                    self._do(place+1+idx)
+                    self.selected[idx+place+1]=False
+                    self.result=self.result[:len(self.result)-1]
+                    
+    def _correct(self):
+        rep=self.result
+        for i in ["a","e","i","o","u"]:
+            rep = rep.replace(i,"")
+        if len(rep)<=self.l-1 and len(rep)>=2:
+            print(self.result)
